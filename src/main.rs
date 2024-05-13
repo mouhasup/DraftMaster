@@ -92,6 +92,8 @@ fn main() {
             }
             canvas.set_draw_color(Color::WHITE);
 
+            
+
             if !points.is_empty() {
                 for k in 0..points.len() - 1 {
                     let _ = canvas.draw_line(

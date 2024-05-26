@@ -20,7 +20,7 @@
 ## Introduction
 **DraftMaster** is a simple and efficient technical drawing software designed to facilitate the creation of technical drawings and the management of widgets in an SDL2 interface. This project uses SDL2 to provide an interactive user interface with buttons for various drawing actions.
 
-## Fonctionnalités
+## Features
 * **Integrated Widgets** : Buttons for drawing lines, polylines, axes, rectangles, polygons, points, and circles.
 
 * **Dual Viewport** : Separation between the drawing area and the widget area for better organization.
@@ -82,8 +82,6 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## Authors
 
 - Mouhameth Alioune Diouf
--
--
 
 ## License
 

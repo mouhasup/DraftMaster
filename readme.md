@@ -3,18 +3,15 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Project Structure](#project-structure)
+- [Features](#Features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Controls](#controls)
   - [Statistics](#statistics)
-- [Animation Assets](#animation-assets)
-- [Algorithm](#algorithm)
-- [Physics and Vehicle Dynamics](#physics-and-vehicle-dynamics)
-- [Optional Features](#optional-features)
-- [Authors](#authors)
+- [Project-Structure](#Project Structure)
 - [Contributing](#contributing)
+- [Authors](#authors)
 - [License](#license)
 
 ## Introduction

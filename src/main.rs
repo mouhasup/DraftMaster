@@ -1,9 +1,9 @@
-use sdl2::event::Event;
-use sdl2::keyboard::Keycode;
-use sdl2::mouse::MouseButton;
 use sdl2::pixels::Color;
 use sdl2::rect::{Point, Rect};
+use std::collections::btree_map::Values;
+use std::hash::BuildHasherDefault;
 use std::time::Duration;
+use std::collections::HashMap;
 // Widgets module
 mod buttons;
 use buttons::Button;
@@ -16,7 +16,7 @@ fn main() {
     let video_subsystem = sdl_context.video().unwrap();
 
     let window = video_subsystem
-        .window("SDL2 Viewport Example", 1200, 800)
+        .window("DraftMaster", 1200, 800)
         .position_centered()
         .opengl()
         .build()
@@ -40,9 +40,6 @@ fn main() {
     // Fill buttons -----
     let mut buttons = Button::fill_buttons();
 
-    let mut button_color = Color::RGB(50, 50, 50);
-    let draw_rect = Rect::new(5, 5, 100, 30);
-
     let mut canvas = window.into_canvas().build().unwrap();
     let mut event_pump = sdl_context.event_pump().unwrap();
     let window_width = canvas.output_size().unwrap().0;
@@ -57,6 +54,18 @@ fn main() {
         window_height - widgets_box_height,
     );
 
+    let mut draw_codes: HashMap<String, bool> = HashMap::new();
+
+    // Initialize widgets -------
+    for button in &buttons {
+        canvas.set_draw_color(button.color);
+        canvas.fill_rect(button.rect).unwrap();
+        draw_codes.insert(button.code.clone(), false);
+    }
+    draw_codes.insert("first".to_string(), false);
+    canvas.present();
+    
+
     'running: loop {
         let mut needs_render = false;
         let mut can_break = false;
@@ -67,11 +76,14 @@ fn main() {
             &mut buttons,
             viewport_widgets,
             viewport_drawing,
+            &mut draw_codes,
         );
+        // break the loop according to the handle events
         if can_break {
             break 'running;
         }
 
+        // Render if needed
         if needs_render {
             // Effacer les deux viewports
             canvas.set_draw_color(Color::RGB(0, 0, 0));
@@ -87,10 +99,8 @@ fn main() {
             // Dessiner """----les dessins----""" dans le viewport du dessin
             canvas.set_draw_color(Color::RGB(250, 250, 250));
             canvas.set_viewport(viewport_drawing);
-            canvas.fill_rect(draw_rect).unwrap();
-            canvas.draw_line(Point::new(0,0),Point::new(60,80));
-            canvas.draw_line(Point::new(0,0),Point::new(61,81));
-
+            let _=canvas.draw_line(Point::new(0, 0), Point::new(60, 80));
+            let _=canvas.draw_line(Point::new(0, 0), Point::new(61, 81));
 
             // Dessiner d'autres éléments ici
 

@@ -54,7 +54,7 @@ impl Button {
     }
     // Set true to the moussdown
     // It means that the moussdown events is detected on the button
-    pub fn set_mousdown(&mut self){
+    pub fn set_moussdown(&mut self){
         self.moussdown = true;
     }
 }

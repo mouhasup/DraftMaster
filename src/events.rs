@@ -18,6 +18,8 @@ pub fn handle_events(
     viewport_widgets: Rect,
     viewport_drawing: Rect,
     draw_codes: &mut HashMap<String, bool>,
+    points_drawing: &mut Vec<Point>,
+    mouse_drawing_position: &mut Point,
 ) -> (bool, bool) {
     let mut needs_render = false;
     let mut can_break = false;
@@ -41,16 +43,17 @@ pub fn handle_events(
                             if mouse_btn == MouseButton::Left {
                                 // Clic gauche sur les widgets
                                 button.set_color(Color::RGB(100, 100, 100)); 
-                                button.set_mousdown();
+                                button.set_moussdown();
                             }
                         }
                     }
                 } else if viewport_drawing.contains_point(mouse_position) { // Drawing viewport
                     // Gestion des événements pour le dessin
-                    needs_render = true;
+                    // needs_render = true;
 
                     if mouse_btn == MouseButton::Left {
                         // Clic gauche pour dessiner
+                        points_drawing.push(Point::new(x,y));
                         // needs_render = true;
                     }
                 }
@@ -67,15 +70,23 @@ pub fn handle_events(
                         // Clic gauche sur les widgets
                         button.set_color(Color::RGB(50, 50, 50));
                         if button.moussdown{
-                            
+
                         }
                     }
                 } else if viewport_drawing.contains_point(mouse_position) { // Drawing viewport
                     // Gestion des événements pour le dessin
-                    needs_render = true;
+                    // needs_render = true;
                     if mouse_btn == MouseButton::Left {
                         // Clic gauche pour dessiner
                     }
+                }
+            }
+            Event::MouseMotion { x, y, .. } => {
+                let (x, y) = (x as i32, y as i32);
+                let mouse_position = Point::new(x, y);
+                if viewport_drawing.contains_point(mouse_position) {  // Drawing viewport
+                    *mouse_drawing_position = mouse_position;
+   
                 }
             }
             _ => {}

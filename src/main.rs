@@ -108,7 +108,7 @@ fn main() {
             let _ = canvas.draw_line(Point::new(0, 0), Point::new(61, 81));
 
             // Dessiner d'autres éléments ici
-            for button in buttons {
+            for button in &buttons {
                 if let Some(tsss) = draw_codes.get(&button.code) {}
             }
             canvas.present();

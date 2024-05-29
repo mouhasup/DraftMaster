@@ -1,6 +1,7 @@
 use sdl2::pixels::Color;
 use sdl2::rect::{Point, Rect};
 
+// #[derive(Copy)]
 pub struct Button {
     pub rect: Rect,
     pub color: Color,
